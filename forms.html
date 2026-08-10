@@ -43,6 +43,25 @@
     padding: 32px 24px 64px;
   }
   #status { color: var(--gray); font-style: italic; }
+  a.print-cta {
+    display: block;
+    text-align: center;
+    background: var(--teal);
+    color: white;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.15rem;
+    padding: 18px 24px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(31,111,99,0.25);
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  a.print-cta:hover {
+    background: var(--teal-dark);
+    transform: translateY(-1px);
+  }
   #search {
     width: 100%;
     padding: 12px 14px;
@@ -83,18 +102,6 @@
     font-weight: normal;
     color: var(--teal-dark);
   }
-  li.item a.download {
-    flex-shrink: 0;
-    background: var(--teal);
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-    font-weight: bold;
-  }
-  li.item a.download:hover { background: var(--teal-dark); }
   footer {
     text-align: center;
     color: var(--gray);
@@ -119,9 +126,10 @@
   <p>Intake, adoption, transfer, and other operational forms</p>
 </header>
 
-<nav class="top"><a href="index.html">&larr; Back to Resource Library</a> &nbsp;|&nbsp; <a href="forms-print.html">🖨️ Select files to print</a></nav>
+<nav class="top"><a href="index.html">&larr; Back to Resource Library</a></nav>
 
 <main>
+  <a class="print-cta" href="forms-print.html">🖨️ Select Forms to Print</a>
   <input type="text" id="search" placeholder="Search by name...">
   <p id="status">Loading files...</p>
   <div id="categories"></div>
@@ -205,7 +213,6 @@ async function loadFiles() {
           li.className = "item";
           li.innerHTML = `
             <h3>${titleize(file.name)}</h3>
-            <a class="download" href="${file.download_url}" download>Download</a>
           `;
           ul.appendChild(li);
         });
